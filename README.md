@@ -1,21 +1,13 @@
 # TypoKiller
+### _qu'est que ce_
 
-**TODO: Add description**
+#### Usage
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `typo_killer` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:typo_killer, "~> 0.1.0"}
-  ]
-end
+With elixir installed, open `typo_killer` folder and use the following commands on your terminal:
+```
+mix deps.get
+mix compile
+iex -S mix
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/typo_killer](https://hexdocs.pm/typo_killer).
-
+Then just: `TypoKiller.find_typos("path/to/folder")`
