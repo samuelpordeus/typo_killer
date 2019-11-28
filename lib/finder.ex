@@ -30,10 +30,4 @@ defmodule TypoKiller.Finder do
     |> Enum.uniq()
     |> WordsFilter.remove_english_words()
   end
-
-  # IO.puts("----------------------------------------------------------")
-  # IO.puts("word: #{word}")
-  # IO.puts("bag_distance: #{bag_distance}")
-  # IO.puts("jaro_distance: #{jaro_distance}")
-  # IO.puts("----------------------------------------------------------")
 end
