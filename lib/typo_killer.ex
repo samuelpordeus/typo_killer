@@ -6,7 +6,7 @@ defmodule TypoKiller do
   def find_typos(path \\ ".") do
     path
     |> FileParser.find_files_on_folder()
-    |> WordsFilter.clean_data()
+    |> WordsFilter.files_to_words()
     |> Dictionary.create()
     |> Finder.find_typos()
     |> print_typo_candidates()

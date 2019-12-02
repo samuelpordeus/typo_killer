@@ -1,5 +1,5 @@
 defmodule TypoKiller.WordsFilter do
-  def clean_data(files) do
+  def files_to_words(files) do
     Enum.flat_map(files, &find_words/1) |> Enum.uniq()
   end
 
