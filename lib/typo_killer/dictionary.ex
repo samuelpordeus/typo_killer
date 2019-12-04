@@ -8,6 +8,8 @@ defmodule TypoKiller.Dictionary do
 
   @ignored_words_mapset MapSet.new(@ignored_words_list)
 
+  @dialyzer {:nowarn_function, create: 1}
+
   @doc """
   Creates a dictionary from loaded English words and compare with typos
   and generate a tuple with different words and the dictionary
