@@ -9,6 +9,7 @@ defmodule TypoKiller.Finder do
   Based on a list of words, generate possible typos with an English dictionary
   """
   @spec find_typos({words :: MapSet.t, dictionary :: MapSet.t}) :: MapSet.t
+
   def find_typos({words, dictionary}) do
     words
     |> Enum.map(&Task.async(fn -> calculate_distance(&1, dictionary) end))
