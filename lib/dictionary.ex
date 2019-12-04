@@ -1,7 +1,9 @@
 defmodule Dictionary do
   alias TypoKiller.WordsFilter
 
-  @aux_dictionary_path "./priv/ignored_words.txt"
+  @ignored_words "./priv/ignored_words.txt"
+                 |> File.read!()
+                 |> String.split("\n")
 
   def create(words) do
     dictionary = words ++ aux_dictionary()
@@ -10,9 +12,5 @@ defmodule Dictionary do
     %{list_of_words: words, dictionary: dictionary}
   end
 
-  def aux_dictionary() do
-    @aux_dictionary_path
-    |> File.read!()
-    |> String.split("\n")
-  end
+  def aux_dictionary, do: @ignored_words
 end
