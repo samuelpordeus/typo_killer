@@ -14,7 +14,7 @@ defmodule TypoKiller do
   end
 
   defp print_typo_candidates(possible_typos) do
-    IO.puts("There are #{length(possible_typos)} possible typos on your folder!")
+    IO.puts("There are #{MapSet.size(possible_typos)} possible typos on your folder!")
     IO.puts("Here are the official typo candidates:")
     Enum.each(possible_typos, fn typo -> IO.puts(typo) end)
   end
