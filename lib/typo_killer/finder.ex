@@ -18,7 +18,8 @@ defmodule TypoKiller.Finder do
 
   @spec calculate_distance(word :: String.t, dict :: list(String.t)) :: list(String.t | nil)
   defp calculate_distance(word, dict) do
-    Enum.map(dict, fn word_from_dict ->
+    dict
+    |> Enum.map(fn word_from_dict ->
       bag_distance = String.bag_distance(word, word_from_dict)
 
       with true <- bag_distance >= @minimum_bag_distance,
