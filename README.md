@@ -30,5 +30,9 @@ Just run `mix typo_killer path/to/folder`
 - [Phoenix](https://github.com/phoenixframework/phoenix/pull/3623)
 - [Devise](https://github.com/plataformatec/devise/pull/5167)
 
+### Documentation
+
+You can generate the documentation using command `mix docs`
+
 #### Contributing
 Feel free to suggest some new features or report bugs creating a new issue. Or even better, you can open a pull request! 😄
