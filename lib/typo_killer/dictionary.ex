@@ -1,9 +1,19 @@
 defmodule TypoKiller.Dictionary do
+  @moduledoc """
+  Load a list of words and manage dictionary
+  """
   @ignored_words_list "./priv/ignored_words.txt"
                       |> File.read!()
                       |> String.split("\n")
 
   @ignored_words_mapset MapSet.new(@ignored_words_list)
+
+  @doc """
+  Creates a dictionary from loaded English words and compare with typos
+  and generate a tuple with different words and the dictionary
+  """
+  @spec create(words :: list(String.t)) :: {list(String.t), list(String.t)}
+  def create(words)
 
   def create(words) do
     dictionary = words ++ aux_dictionary()
