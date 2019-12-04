@@ -25,6 +25,7 @@ Then just: `TypoKiller.find_typos("path/to/folder")`
 Just run `mix typo_killer path/to/folder`
 
 #### Typo Killer on the wild
+Are you using Typo Killer on big repos? Send a PR adding it here! :slightly_smiling_face:
 - [Elixir](https://github.com/elixir-lang/elixir/pull/9611)
 - [Ecto](https://github.com/elixir-ecto/ecto/pull/3174)
 - [Phoenix](https://github.com/phoenixframework/phoenix/pull/3623)
