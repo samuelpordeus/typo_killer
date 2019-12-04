@@ -1,6 +1,14 @@
 defmodule TypoKiller.Finder do
+  @moduledoc """
+  Find typos based on percentage and try to avoid the max of possible false positives
+  """
   @minimum_bag_distance 0.75
   @minimum_jaro_distance 0.95
+
+  @doc """
+  Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
+  """
+  @spec find_typos({words :: MapSet.t, dictionary :: MapSet.t}) :: MapSet.t
 
   def find_typos({words, dictionary}) do
     words
@@ -10,8 +18,10 @@ defmodule TypoKiller.Finder do
     |> MapSet.delete(nil)
   end
 
+  @spec calculate_distance(word :: String.t, dict :: list(String.t)) :: list(String.t | nil)
   defp calculate_distance(word, dict) do
-    Enum.map(dict, fn word_from_dict ->
+    dict
+    |> Enum.map(fn word_from_dict ->
       bag_distance = String.bag_distance(word, word_from_dict)
 
       with true <- bag_distance >= @minimum_bag_distance,
