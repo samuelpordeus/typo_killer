@@ -12,12 +12,12 @@ defmodule TypoKiller.Dictionary do
   Creates a dictionary from loaded English words and compare with typos
   and generate a tuple with different words and the dictionary
   """
-  @spec create(words :: list(String.t)) :: {list(String.t), list(String.t)}
+  @spec create(words :: MapSet.t) :: {MapSet.t, MapSet.t}
   def create(words)
 
-  def create(words) do
-    dictionary = words ++ aux_dictionary()
-    words = remove_ignored_words(words)
+  def create(%MapSet{} = words) do
+    dictionary = MapSet.union(words, @ignored_words_mapset)
+    words = MapSet.difference(words, @ignored_words_mapset)
 
     {words, dictionary}
   end
