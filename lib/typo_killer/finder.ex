@@ -2,8 +2,6 @@ defmodule TypoKiller.Finder do
   @moduledoc """
   Find typos based on percentage and try to avoid the max of possible false positives
   """
-
-  alias TypoKiller.Dictionary
   @minimum_bag_distance 0.75
   @minimum_jaro_distance 0.95
 
@@ -31,12 +29,5 @@ defmodule TypoKiller.Finder do
         false -> nil
       end
     end)
-  end
-
-  defp clean_words_list(list_of_words) do
-    list_of_words
-    |> Enum.reject(&is_nil/1)
-    |> Enum.uniq()
-    |> Dictionary.remove_ignored_words()
   end
 end
