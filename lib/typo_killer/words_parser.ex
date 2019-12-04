@@ -9,7 +9,9 @@ defmodule TypoKiller.WordsParser do
   @spec files_to_words(files :: list(String.t) | []) :: MapSet.t
   def files_to_words(files)
 
-  def files_to_words(files) do
+  def files_to_words(files) when is_list(files) and length(files) == 0, do: MapSet.new()
+
+  def files_to_words(files) when is_list(files) and length(files) > 0 do
     files
     |> Enum.flat_map(&find_words/1)
     |> MapSet.new()
