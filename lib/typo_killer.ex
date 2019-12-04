@@ -1,9 +1,23 @@
 defmodule TypoKiller do
+  @moduledoc """
+  Qu'est-ce que c'est
+
+  Fa-fa-fa-fa-fa-fa-fa-fa-fa
+
+  It's a funny app to search wrong typos inside projects and report
+  the words that can be fixed and, with this project, you can
+  contribute to open-source repos with the famous `Fix typo` commits/PRs.
+  """
+  require Logger
   alias TypoKiller.Dictionary
   alias TypoKiller.FileParser
   alias TypoKiller.WordsParser
   alias TypoKiller.Finder
 
+  @doc """
+  Scan a folder, find all possible typos and log them
+  """
+  @spec find_typos(path :: binary()) :: :ok
   def find_typos(path \\ ".") do
     path
     |> FileParser.find_files_on_folder()
@@ -19,6 +33,10 @@ defmodule TypoKiller do
     Enum.each(possible_typos, fn typo -> IO.puts(typo) end)
   end
 
+  @doc """
+  Execute the benchmark for `find_typos` function
+  """
+  @spec benchmark_find_typos(path :: String.t) :: any
   def benchmark_find_typos(path \\ ".") do
     Benchee.run(
       %{
