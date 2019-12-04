@@ -19,7 +19,8 @@ defmodule TypoKiller.MixProject do
 
   defp deps do
     [
-      {:benchee, "~> 1.0", only: :dev}
+      {:benchee, "~> 1.0", only: :dev},
+      {:dialyxir, "~> 0.5.1", only: :dev}
     ]
   end
 end

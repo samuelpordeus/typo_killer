@@ -2,5 +2,6 @@
   "benchee": {:hex, :benchee, "1.0.1", "66b211f9bfd84bd97e6d1beaddf8fc2312aaabe192f776e8931cb0c16f53a521", [:mix], [{:deep_merge, "~> 1.0", [hex: :deep_merge, repo: "hexpm", optional: false]}], "hexpm"},
   "bloomex": {:hex, :bloomex, "1.1.0", "2ce14fd4b40b3e6cc6fa68c133fd98f589a83839d4b82135e34cbf852f54ea47", [:mix], [], "hexpm"},
   "deep_merge": {:hex, :deep_merge, "1.0.0", "b4aa1a0d1acac393bdf38b2291af38cb1d4a52806cf7a4906f718e1feb5ee961", [:mix], [], "hexpm"},
+  "dialyxir": {:hex, :dialyxir, "0.5.1", "b331b091720fd93e878137add264bac4f644e1ddae07a70bf7062c7862c4b952", [:mix], [], "hexpm"},
   "simetric": {:hex, :simetric, "0.2.0", "0d6559aed7b08fd1b6794526c33836e55cee8dd99d2f9bf3e8ea46fdeb47d9e3", [:mix], [], "hexpm"},
 }
