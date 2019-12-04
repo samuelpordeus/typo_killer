@@ -27,10 +27,18 @@ defmodule TypoKiller do
     |> print_typo_candidates()
   end
 
-  defp print_typo_candidates(possible_typos) do
-    IO.puts("There are #{length(possible_typos)} possible typos on your folder!")
-    IO.puts("Here are the official typo candidates:")
-    Enum.each(possible_typos, fn typo -> IO.puts(typo) end)
+  @spec print_typo_candidates(possible_typos :: MapSet.t) :: :ok
+  defp print_typo_candidates(%MapSet{} = possible_typos) do
+    Logger.info("There are #{MapSet.size(possible_typos)} possible typos on your folder!")
+
+    if MapSet.size(possible_typos) > 0 do
+      Logger.info("Here are the official typo candidates:")
+
+      possible_typos
+      |> Enum.each(&Logger.info("Typo found: #{&1}"))
+    end
+
+    :ok
   end
 
   @doc """
