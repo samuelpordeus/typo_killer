@@ -17,7 +17,7 @@ defmodule TypoKiller do
   @doc """
   Scan a folder, find all possible typos and log them
   """
-  @spec find_typos(path :: binary()) :: :ok | {:error, String.t}
+  @spec find_typos(path :: binary()) :: :ok | {:error, String.t()}
   def find_typos(path \\ ".") do
     path
     |> FileParser.find_files_on_folder()
@@ -27,7 +27,7 @@ defmodule TypoKiller do
     |> print_typo_candidates()
   end
 
-  @spec print_typo_candidates(possible_typos :: MapSet.t) :: :ok | {:error, String.t}
+  @spec print_typo_candidates(possible_typos :: MapSet.t()) :: :ok | {:error, String.t()}
   defp print_typo_candidates(possible_typos) do
     Logger.info("There are #{MapSet.size(possible_typos)} possible typos on your folder!")
 
@@ -44,7 +44,7 @@ defmodule TypoKiller do
   @doc """
   Execute the benchmark for `find_typos` function
   """
-  @spec benchmark_find_typos(path :: String.t) :: any
+  @spec benchmark_find_typos(path :: String.t()) :: any
   def benchmark_find_typos(path \\ ".") do
     %{"find_typos" => fn -> find_typos(path) end}
     |> Benchee.run(time: 1, memory_time: 1)

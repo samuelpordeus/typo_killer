@@ -10,7 +10,7 @@ defmodule TypoKiller.FileParser do
   - When path is a directory, scan the entire folder and subfolders for files
   - When path is something different, it returns an empty list
   """
-  @spec find_files_on_folder(path :: String.t) :: list(String.t) | []
+  @spec find_files_on_folder(path :: String.t()) :: list(String.t()) | []
   def find_files_on_folder(path \\ ".") do
     cond do
       File.regular?(path) ->

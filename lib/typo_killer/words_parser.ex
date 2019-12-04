@@ -6,7 +6,7 @@ defmodule TypoKiller.WordsParser do
   @doc """
   Retrieve words from files and generate a new mapset based on filters
   """
-  @spec files_to_words(files :: list(String.t) | []) :: MapSet.t
+  @spec files_to_words(files :: list(String.t()) | []) :: MapSet.t()
   def files_to_words(files)
 
   def files_to_words(files) when is_list(files) and length(files) == 0, do: MapSet.new()

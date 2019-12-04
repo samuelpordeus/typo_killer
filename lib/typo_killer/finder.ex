@@ -8,7 +8,7 @@ defmodule TypoKiller.Finder do
   @doc """
   Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
   """
-  @spec find_typos({words :: MapSet.t, dictionary :: MapSet.t}) :: MapSet.t
+  @spec find_typos({words :: MapSet.t(), dictionary :: MapSet.t()}) :: MapSet.t()
 
   def find_typos({words, dictionary}) do
     words
@@ -18,7 +18,7 @@ defmodule TypoKiller.Finder do
     |> MapSet.delete(nil)
   end
 
-  @spec calculate_distance(word :: String.t, dict :: list(String.t)) :: list(String.t | nil)
+  @spec calculate_distance(word :: String.t(), dict :: list(String.t())) :: list(String.t() | nil)
   defp calculate_distance(word, dict) do
     dict
     |> Enum.map(fn word_from_dict ->
