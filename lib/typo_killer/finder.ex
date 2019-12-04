@@ -1,9 +1,9 @@
 defmodule TypoKiller.Finder do
-  alias TypoKiller.WordsFilter
+  alias TypoKiller.Dictionary
   @minimum_bag_distance 0.75
   @minimum_jaro_distance 0.95
 
-  def find_typos(%{list_of_words: list_of_words, dictionary: dictionary}) do
+  def find_typos({list_of_words, dictionary}) do
     list_of_words
     |> Enum.map(&Task.async(fn -> calculate_distance(&1, dictionary) end))
     |> Enum.flat_map(&Task.await(&1, :infinity))
@@ -28,6 +28,6 @@ defmodule TypoKiller.Finder do
     list_of_words
     |> Enum.reject(&is_nil/1)
     |> Enum.uniq()
-    |> WordsFilter.remove_english_words()
+    |> Dictionary.remove_ignored_words()
   end
 end

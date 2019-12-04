@@ -1,4 +1,5 @@
 defmodule TypoKiller do
+  alias TypoKiller.Dictionary
   alias TypoKiller.FileParser
   alias TypoKiller.WordsParser
   alias TypoKiller.Finder
