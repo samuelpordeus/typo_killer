@@ -17,7 +17,7 @@ defmodule TypoKiller do
   @doc """
   Scan a folder, find all possible typos and log them
   """
-  @spec find_typos(path :: binary()) :: :ok
+  @spec find_typos(path :: binary()) :: :ok | {:error, String.t}
   def find_typos(path \\ ".") do
     path
     |> FileParser.find_files_on_folder()
@@ -27,8 +27,8 @@ defmodule TypoKiller do
     |> print_typo_candidates()
   end
 
-  @spec print_typo_candidates(possible_typos :: MapSet.t) :: :ok
-  defp print_typo_candidates(%MapSet{} = possible_typos) do
+  @spec print_typo_candidates(possible_typos :: MapSet.t) :: :ok | {:error, String.t}
+  defp print_typo_candidates(possible_typos) do
     Logger.info("There are #{MapSet.size(possible_typos)} possible typos on your folder!")
 
     if MapSet.size(possible_typos) > 0 do
