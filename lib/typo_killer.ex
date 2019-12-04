@@ -46,12 +46,7 @@ defmodule TypoKiller do
   """
   @spec benchmark_find_typos(path :: String.t) :: any
   def benchmark_find_typos(path \\ ".") do
-    Benchee.run(
-      %{
-        "find_typos" => fn -> find_typos(path) end
-      },
-      time: 1,
-      memory_time: 1
-    )
+    %{"find_typos" => fn -> find_typos(path) end}
+    |> Benchee.run(time: 1, memory_time: 1)
   end
 end
