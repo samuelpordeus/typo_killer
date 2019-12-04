@@ -6,7 +6,7 @@ defmodule TypoKiller.Finder do
   @minimum_jaro_distance 0.95
 
   @doc """
-  Based on a list of words, generate possible typos with an English dictionary
+  Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
   """
   @spec find_typos({words :: MapSet.t, dictionary :: MapSet.t}) :: MapSet.t
 

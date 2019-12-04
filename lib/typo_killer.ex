@@ -4,7 +4,7 @@ defmodule TypoKiller do
 
   Fa-fa-fa-fa-fa-fa-fa-fa-fa
 
-  It's a funny app to search wrong typos inside projects and report
+  It's a funny app to search typos inside projects and report
   the words that can be fixed and, with this project, you can
   contribute to open-source repos with the famous `Fix typo` commits/PRs.
   """
