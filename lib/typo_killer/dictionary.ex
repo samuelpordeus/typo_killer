@@ -1,4 +1,4 @@
-defmodule Dictionary do
+defmodule TypoKiller.Dictionary do
   alias TypoKiller.WordsFilter
 
   @ignored_words "./priv/ignored_words.txt"
