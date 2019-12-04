@@ -4,13 +4,25 @@
 #### Usage
 
 With elixir installed, open `typo_killer` folder and use the following commands on your terminal:
+
 ```
 mix deps.get
 mix compile
+```
+
+**Using iex**
+
+Open an iex session:
+
+```
 iex -S mix
 ```
 
 Then just: `TypoKiller.find_typos("path/to/folder")`
+
+**Using mix**
+
+Just run `mix typo_killer path/to/folder`
 
 #### Typo Killer on the wild
 - [Elixir](https://github.com/elixir-lang/elixir/pull/9611)
