@@ -35,7 +35,7 @@ defmodule TypoKiller do
       Logger.info("Here are the official typo candidates:")
 
       possible_typos
-      |> Enum.each(&Logger.info("Typo found: #{&1}"))
+      |> Enum.each(&Logger.info("#{&1}"))
     end
 
     :ok

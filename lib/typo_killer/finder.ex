@@ -27,7 +27,7 @@ defmodule TypoKiller.Finder do
       with true <- bag_distance >= @minimum_bag_distance,
            jaro_distance <- String.jaro_distance(word, word_from_dict),
            true <- jaro_distance >= @minimum_jaro_distance and jaro_distance < 1.0 do
-        word
+        IO.inspect(word)
       else
         false -> nil
       end
