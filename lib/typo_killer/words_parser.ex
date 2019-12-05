@@ -1,6 +1,6 @@
 defmodule TypoKiller.WordsParser do
   @moduledoc """
-  Manage words from files and parse then to analyze if they are possible typos or not
+  Manage words from files and parse them to analyze if they are possible typos or not
   """
 
   @doc """

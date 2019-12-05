@@ -1,6 +1,6 @@
 defmodule TypoKiller.Finder do
   @moduledoc """
-  Find typos based on percentage and try to avoid the max of possible false positives
+  Find typos
   """
   @minimum_bag_distance 0.75
   @minimum_jaro_distance 0.95
