@@ -1,14 +1,17 @@
 # Typo Killer
 ### _qu'est que ce_
 
-#### Usage
+#### Building
 
-With elixir installed, open `typo_killer` folder and use the following commands on your terminal:
+With elixir installed, open `typo_killer` folder and use the following commands
+on your terminal:
 
 ```
 mix deps.get
 mix compile
 ```
+
+#### Simple Usage
 
 **Using iex**
 
@@ -24,7 +27,25 @@ Then just: `TypoKiller.find_typos("path/to/folder")`
 
 Just run `mix typo_killer path/to/folder`
 
+#### Creating a binary
+
+This will create a self contained executable file which will include everything
+that you need to run TypoKiller. This file can be distributed to other people
+and they don't need to have an Erlang runtime installed - it's all in the
+binary file.
+
+To create it, run:
+
+```
+mix escript.build
+```
+
+This will generate an executable file `bin/typokiller`. Now run
+`./bin/typokiller --help` for more information.
+
+
 #### Typo Killer on the wild
+
 Are you using Typo Killer on big repos? Send a PR adding it here! :slightly_smiling_face:
 - [Elixir](https://github.com/elixir-lang/elixir/pull/9611)
 - [Ecto](https://github.com/elixir-ecto/ecto/pull/3174)
