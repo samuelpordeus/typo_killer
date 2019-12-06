@@ -17,7 +17,16 @@ defmodule TypoKiller.WordsParser do
     |> MapSet.new()
   end
 
-  @spec find_words(file :: String.t()) :: list()
+  @doc """
+  Retrieve words from one file and generate a new mapset with them
+  """
+  @spec file_to_words(String.t()) :: MapSet.t()
+  def file_to_words(file) do
+    file
+    |> find_words()
+    |> MapSet.new()
+  end
+
   defp find_words(file) do
     file
     |> File.read!()
