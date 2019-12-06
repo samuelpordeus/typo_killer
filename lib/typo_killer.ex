@@ -19,6 +19,8 @@ defmodule TypoKiller do
   """
   @spec find_typos(path :: binary()) :: :ok | {:error, String.t()}
   def find_typos(path \\ ".") do
+    IO.puts("Running on path \"#{path}\"...")
+
     path
     |> FileParser.find_files_on_folder()
     |> WordsParser.files_to_words()

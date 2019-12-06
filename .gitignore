@@ -24,3 +24,6 @@ typo_killer-*.tar
 
 # Ignore Elixir LS (dialyzer) build folder
 /.elixir_ls/
+
+# Escript generated binaries
+/bin/

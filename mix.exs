@@ -16,6 +16,7 @@ defmodule TypoKiller.MixProject do
         plt_add_apps: [:mix],
         remove_defaults: [:unknown]
       ],
+      escript: escript(),
       name: "Typo Killer",
       source_url: @repo,
       docs: [
@@ -28,6 +29,13 @@ defmodule TypoKiller.MixProject do
   def application do
     [
       extra_applications: [:logger]
+    ]
+  end
+
+  defp escript do
+    [
+      main_module: TypoKiller.CLI,
+      path: "bin/typokiller"
     ]
   end
 
