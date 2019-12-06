@@ -43,7 +43,8 @@ defmodule TypoKiller.MixProject do
     [
       {:benchee, "~> 1.0", only: :dev},
       {:dialyxir, "~> 0.5.1", only: :dev, runtime: false},
-      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false},
+      {:flow, "~> 0.15.0"}
     ]
   end
 end

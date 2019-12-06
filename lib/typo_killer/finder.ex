@@ -11,8 +11,10 @@ defmodule TypoKiller.Finder do
 
   def find_typos({words, dictionary}) do
     words
-    |> Enum.map(&Task.async(fn -> calculate_distance(&1, dictionary) end))
-    |> Enum.flat_map(&Task.await(&1, :infinity))
+    |> Flow.from_enumerable()
+    |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
+    |> Flow.reduce(fn -> MapSet.new() end, fn a, b -> MapSet.union(MapSet.new(a), b) end)
+    |> Enum.to_list()
     |> MapSet.new()
     |> MapSet.delete(nil)
   end

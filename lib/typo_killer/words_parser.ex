@@ -17,7 +17,12 @@ defmodule TypoKiller.WordsParser do
     |> MapSet.new()
   end
 
-  @spec find_words(file :: String.t()) :: list()
+  def file_to_words(file) do
+    file
+    |> find_words()
+    |> MapSet.new()
+  end
+
   defp find_words(file) do
     file
     |> File.read!()
