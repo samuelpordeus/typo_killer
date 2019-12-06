@@ -2,7 +2,6 @@ defmodule TypoKiller.Finder do
   @moduledoc """
   Find typos
   """
-  @minimum_bag_distance 0.75
   @minimum_jaro_distance 0.95
 
   @doc """
@@ -22,10 +21,7 @@ defmodule TypoKiller.Finder do
   defp calculate_distance(word, dict) do
     dict
     |> Enum.map(fn word_from_dict ->
-      bag_distance = String.bag_distance(word, word_from_dict)
-
-      with true <- bag_distance >= @minimum_bag_distance,
-           jaro_distance <- String.jaro_distance(word, word_from_dict),
+      with jaro_distance <- String.jaro_distance(word, word_from_dict),
            true <- jaro_distance >= @minimum_jaro_distance and jaro_distance < 1.0 do
         word
       else
