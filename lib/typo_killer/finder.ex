@@ -14,7 +14,6 @@ defmodule TypoKiller.Finder do
     |> Flow.from_enumerable()
     |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
     |> Flow.reduce(fn -> MapSet.new() end, fn a, b -> MapSet.union(MapSet.new(a), b) end)
-    |> Enum.to_list()
     |> MapSet.new()
     |> MapSet.delete(nil)
   end
