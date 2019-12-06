@@ -13,9 +13,14 @@ defmodule TypoKiller.Finder do
     words
     |> Flow.from_enumerable()
     |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
-    |> Flow.reduce(fn -> MapSet.new() end, fn a, b -> MapSet.union(MapSet.new(a), b) end)
+    |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
     |> MapSet.new()
     |> MapSet.delete(nil)
+  end
+
+  defp merge_partial_result(partial_result, acc) do
+    partial_result_mapset = MapSet.new(partial_result)
+    MapSet.union(partial_result_mapset, acc)
   end
 
   @spec calculate_distance(word :: String.t(), dict :: list(String.t())) :: list(String.t() | nil)
