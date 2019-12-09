@@ -18,11 +18,19 @@ defmodule TypoKiller do
   Scan a folder, find all possible typos and log them
   """
   @spec find_typos(path :: binary()) :: :ok | {:error, String.t()}
-  def find_typos(path \\ ".") do
-    IO.puts("Running on path \"#{path}\"...")
+  def find_typos(path \\ ".", options \\ []) do
+    IO.puts("Path: \"#{path}\"")
+
+    if options != [] do
+      IO.puts("Options:")
+      Enum.each(options, fn {k, v} -> IO.puts("  #{Atom.to_string(k)} -> #{inspect(v)}") end)
+    end
+
+    IO.puts("---")
+    IO.puts("Running...")
 
     path
-    |> FileParser.find_files_on_folder()
+    |> FileParser.find_files_on_folder(options)
     |> WordsParser.files_to_words()
     |> Dictionary.create()
     |> Finder.find_typos()
@@ -31,14 +39,14 @@ defmodule TypoKiller do
 
   @spec print_typo_candidates(possible_typos :: MapSet.t()) :: :ok | {:error, String.t()}
   defp print_typo_candidates(possible_typos) do
-    Logger.info("There are #{MapSet.size(possible_typos)} possible typos on your folder!")
+    Enum.each(possible_typos, fn {word, list_of_ocurrences} ->
+      IO.puts("-> candidate: \"#{word}\"")
 
-    if MapSet.size(possible_typos) > 0 do
-      Logger.info("Here are the official typo candidates:")
-
-      possible_typos
-      |> Enum.each(&Logger.info("#{&1}"))
-    end
+      Enum.each(list_of_ocurrences, fn {file, lines} ->
+        IO.puts("  -> #{file}")
+        IO.puts("    -> Lines: #{Enum.join(lines, ", ")}")
+      end)
+    end)
 
     :ok
   end
