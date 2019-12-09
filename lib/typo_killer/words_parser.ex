@@ -25,7 +25,7 @@ defmodule TypoKiller.WordsParser do
     word_map =
       file
       |> File.stream!()
-      |> Stream.with_index()
+      |> Stream.with_index(1)
       |> Stream.map(&parse_line/1)
       |> Enum.reduce(%{}, &merge_file_results/2)
 
