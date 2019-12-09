@@ -23,7 +23,14 @@ defmodule TypoKiller do
 
     if options != [] do
       IO.puts("Options:")
-      Enum.each(options, fn {k, v} -> IO.puts("  #{Atom.to_string(k)} -> #{inspect(v)}") end)
+
+      Enum.each(options, fn
+        {k, v} when is_list(v) ->
+          IO.puts("  #{Atom.to_string(k)} -> #{Enum.join(v, ", ")}")
+
+        {k, v} ->
+          IO.puts("  #{Atom.to_string(k)} -> #{inspect(v)}")
+      end)
     end
 
     IO.puts("---")
