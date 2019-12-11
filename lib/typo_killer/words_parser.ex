@@ -42,9 +42,9 @@ defmodule TypoKiller.WordsParser do
 
     updated_acc_map =
       Enum.reduce(word_map, acc_map, fn {word, lines}, acc ->
-        ocurrences = Map.get(acc, word, [])
-        updated_ocurrences = [{file, lines} | ocurrences]
-        Map.put(acc, word, updated_ocurrences)
+        occurrences = Map.get(acc, word, [])
+        updated_occurrences = [{file, lines} | occurrences]
+        Map.put(acc, word, updated_occurrences)
       end)
 
     {updated_words, updated_acc_map}
