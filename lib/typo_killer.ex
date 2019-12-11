@@ -50,8 +50,11 @@ defmodule TypoKiller do
       IO.puts("-> candidate: \"#{word}\"")
 
       Enum.each(list_of_occurrences, fn {file, lines} ->
-        IO.puts("  -> #{file}")
-        IO.puts("    -> Lines: #{Enum.join(lines, ", ")}")
+        """
+          -> #{file}
+            -> Lines: #{Enum.join(lines, ", ")}
+        """
+        |> IO.puts()
       end)
     end)
 
