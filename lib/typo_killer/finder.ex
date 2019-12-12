@@ -9,13 +9,17 @@ defmodule TypoKiller.Finder do
   """
   @spec find_typos({words :: MapSet.t(), dictionary :: MapSet.t()}) :: MapSet.t()
 
-  def find_typos({words, dictionary}) do
-    words
-    |> Flow.from_enumerable(max_demand: 100)
-    |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
-    |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
-    |> MapSet.new()
-    |> MapSet.delete(nil)
+  def find_typos({words, dictionary, word_map}) do
+    candidates =
+      words
+      |> Flow.from_enumerable(max_demand: 100)
+      |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
+      |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
+      |> MapSet.new()
+      |> MapSet.delete(nil)
+      |> Enum.to_list()
+
+    Map.take(word_map, candidates)
   end
 
   defp merge_partial_result(partial_result, acc) do

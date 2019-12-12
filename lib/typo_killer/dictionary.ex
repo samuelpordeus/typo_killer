@@ -17,10 +17,10 @@ defmodule TypoKiller.Dictionary do
   @spec create(words :: MapSet.t()) :: {MapSet.t(), MapSet.t()}
   def create(words)
 
-  def create(%MapSet{} = words) do
+  def create({%MapSet{} = words, word_map}) do
     dictionary = MapSet.union(words, @ignored_words_mapset)
-    words = MapSet.difference(words, @ignored_words_mapset)
-
-    {words, dictionary}
+    {words, dictionary, word_map}
   end
+
+  def ignored_words_mapset, do: @ignored_words_mapset
 end
