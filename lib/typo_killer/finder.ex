@@ -11,7 +11,7 @@ defmodule TypoKiller.Finder do
 
   def find_typos({words, dictionary}) do
     words
-    |> Flow.from_enumerable()
+    |> Flow.from_enumerable(max_demand: 100)
     |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
     |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
     |> MapSet.new()
