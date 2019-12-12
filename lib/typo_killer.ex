@@ -17,7 +17,7 @@ defmodule TypoKiller do
   @doc """
   Scan a folder, find all possible typos and log them
   """
-  @spec find_typos(path :: binary()) :: :ok | {:error, String.t()}
+  @spec find_typos(path :: String.t(), options :: Keyword.t()) :: :ok | {:error, String.t()}
   def find_typos(path \\ ".", options \\ []) do
     IO.puts("Path: \"#{path}\"")
 
