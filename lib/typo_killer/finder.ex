@@ -12,16 +12,15 @@ defmodule TypoKiller.Finder do
   def find_typos({words, dictionary, word_map}, options \\ []) do
     max_demand = options[:max_demand] || @default_max_demand
 
-    candidates =
-      words
-      |> Flow.from_enumerable(max_demand: max_demand)
-      |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
-      |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
-      |> MapSet.new()
-      |> MapSet.delete(nil)
-      |> Enum.to_list()
-
-    Map.take(word_map, candidates)
+    words
+    |> Flow.from_enumerable(max_demand: max_demand)
+    |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
+    |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
+    |> Flow.map(fn candidate -> build_result_map(candidate, word_map) end)
+    |> MapSet.new()
+    |> MapSet.delete(nil)
+    |> MapSet.to_list()
+    |> Map.new()
   end
 
   defp merge_partial_result(partial_result, acc) do
@@ -35,10 +34,16 @@ defmodule TypoKiller.Finder do
     |> Enum.map(fn word_from_dict ->
       with jaro_distance <- String.jaro_distance(word, word_from_dict),
            true <- jaro_distance >= @minimum_jaro_distance and jaro_distance < 1.0 do
-        word
+        {word, word_from_dict, jaro_distance}
       else
-        false -> nil
+        _any -> nil
       end
     end)
+  end
+
+  defp build_result_map(nil, _), do: nil
+
+  defp build_result_map({word, match, score}, word_map) do
+    {word, {match, score, Map.get(word_map, word)}}
   end
 end
