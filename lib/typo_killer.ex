@@ -46,8 +46,8 @@ defmodule TypoKiller do
 
   @spec print_typo_candidates(possible_typos :: MapSet.t()) :: :ok | {:error, String.t()}
   defp print_typo_candidates(possible_typos) do
-    Enum.each(possible_typos, fn {word, list_of_occurrences} ->
-      IO.puts("-> candidate: \"#{word}\"")
+    Enum.each(possible_typos, fn {word, {compared_word, score, list_of_occurrences}} ->
+      IO.puts("-> \"#{word}\" looks like \"#{compared_word}\" (#{score})")
 
       Enum.each(list_of_occurrences, fn {file, lines} ->
         """
