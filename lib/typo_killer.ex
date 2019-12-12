@@ -40,7 +40,7 @@ defmodule TypoKiller do
     |> FileParser.find_files_on_folder(options)
     |> WordsParser.files_to_words()
     |> Dictionary.create()
-    |> Finder.find_typos()
+    |> Finder.find_typos(options)
     |> print_typo_candidates()
   end
 

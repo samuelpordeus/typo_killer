@@ -7,12 +7,13 @@ defmodule TypoKiller.Finder do
   @doc """
   Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
   """
-  @spec find_typos({words :: MapSet.t(), dictionary :: MapSet.t()}) :: MapSet.t()
+  @spec find_typos({words :: MapSet.t(), dictionary :: MapSet.t()}, Map.t()) :: MapSet.t()
+  def find_typos({words, dictionary, word_map}, options \\ []) do
+    max_demand = options[:max_demand] || 100
 
-  def find_typos({words, dictionary, word_map}) do
     candidates =
       words
-      |> Flow.from_enumerable(max_demand: 100)
+      |> Flow.from_enumerable(max_demand: max_demand)
       |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
       |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
       |> MapSet.new()
