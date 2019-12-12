@@ -7,7 +7,7 @@ defmodule TypoKiller.Finder do
   @doc """
   Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
   """
-  @spec find_typos({words :: MapSet.t(), dictionary :: MapSet.t()}, Map.t()) :: MapSet.t()
+  @spec find_typos({words :: MapSet.t(), dictionary :: MapSet.t()}, Keyword.t()) :: Map.t()
   def find_typos({words, dictionary, word_map}, options \\ []) do
     max_demand = options[:max_demand] || 100
 
