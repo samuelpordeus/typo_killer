@@ -9,10 +9,9 @@ defmodule TypoKiller do
   contribute to open-source repos with the famous `Fix typo` commits/PRs.
   """
   require Logger
-  alias TypoKiller.Dictionary
-  alias TypoKiller.FileParser
-  alias TypoKiller.WordsParser
-  alias TypoKiller.Finder
+  alias TypoKiller.Files
+  alias TypoKiller.Words
+  alias TypoKiller.Typos
 
   @doc """
   Scan a folder, find all possible typos and log them
@@ -37,14 +36,12 @@ defmodule TypoKiller do
     IO.puts("Running...")
 
     path
-    |> FileParser.find_files_on_folder(options)
-    |> WordsParser.files_to_words()
-    |> Dictionary.create()
-    |> Finder.find_typos(options)
+    |> Files.find_files_on_folder(options)
+    |> Words.files_to_words()
+    |> Typos.find(options)
     |> print_typo_candidates()
   end
 
-  @spec print_typo_candidates(possible_typos :: MapSet.t()) :: :ok | {:error, String.t()}
   defp print_typo_candidates(possible_typos) do
     Enum.each(possible_typos, fn {word, {compared_word, score, list_of_occurrences}} ->
       IO.puts("-> \"#{word}\" looks like \"#{compared_word}\" (#{score})")
