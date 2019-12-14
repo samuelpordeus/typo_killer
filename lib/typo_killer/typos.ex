@@ -8,7 +8,10 @@ defmodule TypoKiller.Typos do
   @doc """
   Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
   """
-  @spec find({words :: MapSet.t(), dictionary :: MapSet.t(), word_map :: Map.t()}, Keyword.t()) :: Map.t()
+  @spec find(
+          {words :: MapSet.t(), dictionary :: MapSet.t(), word_map :: Map.t()},
+          options :: Keyword.t()
+        ) :: Map.t()
   def find({words, dictionary, word_map}, options \\ []) do
     max_demand = options[:max_demand] || @default_max_demand
 

@@ -3,22 +3,27 @@ defmodule TypoKiller.Words do
   Extracts words from files.
   """
 
-  alias TypoKiller.Dictionary
+  @ignored_words_list "./priv/ignored_words.txt"
+                      |> File.read!()
+                      |> String.split("\n")
+
+  @ignored_words_mapset MapSet.new(@ignored_words_list)
 
   @doc """
   Parses a list of files to extract words and their occurrences (file and line)
   """
-  @spec files_to_words(files :: list(String.t()) | []) :: {MapSet.t(), map}
+  @spec files_to_words(files :: [String.t()]) :: {MapSet.t(), map}
   def files_to_words(files)
 
-  def files_to_words(files) when is_list(files) and length(files) == 0, do: {MapSet.new(), %{}}
+  def files_to_words([]), do: {MapSet.new(), %{}}
 
-  def files_to_words(files) when is_list(files) and length(files) > 0 do
+  def files_to_words(files) when is_list(files) do
     files
     |> Flow.from_enumerable()
     |> Flow.map(&parse_file/1)
     |> Enum.to_list()
     |> Enum.reduce({MapSet.new(), %{}}, &merge_file_list_results/2)
+    |> build_dict()
   end
 
   defp parse_file(file) do
@@ -64,12 +69,18 @@ defmodule TypoKiller.Words do
   end
 
   defp ignore_words_filter(word) do
-    !MapSet.member?(Dictionary.ignored_words_mapset(), word)
+    !MapSet.member?(@ignored_words_mapset, word)
   end
 
   defp merge_file_results(entry, acc) do
     Map.merge(entry, acc, fn _key, v1, v2 ->
       v1 ++ v2
     end)
+  end
+
+  defp build_dict({words, word_map}) do
+    dictionary = MapSet.union(words, @ignored_words_mapset)
+
+    {words, dictionary, word_map}
   end
 end
