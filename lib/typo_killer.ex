@@ -10,9 +10,9 @@ defmodule TypoKiller do
   """
   require Logger
   alias TypoKiller.Dictionary
-  alias TypoKiller.FileParser
-  alias TypoKiller.WordsParser
-  alias TypoKiller.Finder
+  alias TypoKiller.Files
+  alias TypoKiller.Words
+  alias TypoKiller.Typos
 
   @doc """
   Scan a folder, find all possible typos and log them
@@ -37,10 +37,10 @@ defmodule TypoKiller do
     IO.puts("Running...")
 
     path
-    |> FileParser.find_files_on_folder(options)
-    |> WordsParser.files_to_words()
+    |> Files.find_files_on_folder(options)
+    |> Words.files_to_words()
     |> Dictionary.create()
-    |> Finder.find_typos(options)
+    |> Typos.find(options)
     |> print_typo_candidates()
   end
 

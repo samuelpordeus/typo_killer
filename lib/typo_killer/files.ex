@@ -1,4 +1,4 @@
-defmodule TypoKiller.FileParser do
+defmodule TypoKiller.Files do
   @moduledoc """
   Parse all files and concat path to a folder to generate a complete list of files ready to be read
   """

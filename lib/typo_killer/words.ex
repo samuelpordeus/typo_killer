@@ -1,12 +1,12 @@
-defmodule TypoKiller.WordsParser do
+defmodule TypoKiller.Words do
   @moduledoc """
-  Manage words from files and parse them to analyze if they are possible typos or not
+  Extracts words from files.
   """
 
   alias TypoKiller.Dictionary
 
   @doc """
-  Retrieve words from files and generate a new mapset based on filters
+  Parses a list of files to extract words and their occurrences (file and line)
   """
   @spec files_to_words(files :: list(String.t()) | []) :: {MapSet.t(), map}
   def files_to_words(files)
@@ -21,7 +21,7 @@ defmodule TypoKiller.WordsParser do
     |> Enum.reduce({MapSet.new(), %{}}, &merge_file_list_results/2)
   end
 
-  def parse_file(file) do
+  defp parse_file(file) do
     word_map =
       file
       |> File.stream!()
