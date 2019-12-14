@@ -10,8 +10,9 @@ defmodule TypoKiller do
   """
   require Logger
   alias TypoKiller.Files
-  alias TypoKiller.Words
+  alias TypoKiller.Output
   alias TypoKiller.Typos
+  alias TypoKiller.Words
 
   @doc """
   Scan a folder, find all possible typos and log them
@@ -39,23 +40,7 @@ defmodule TypoKiller do
     |> Files.find_files_on_folder(options)
     |> Words.files_to_words()
     |> Typos.find(options)
-    |> print_typo_candidates()
-  end
-
-  defp print_typo_candidates(possible_typos) do
-    Enum.each(possible_typos, fn {word, {compared_word, score, list_of_occurrences}} ->
-      IO.puts("-> \"#{word}\" looks like \"#{compared_word}\" (#{score})")
-
-      Enum.each(list_of_occurrences, fn {file, lines} ->
-        """
-          -> #{file}
-            -> Lines: #{Enum.join(lines, ", ")}
-        """
-        |> IO.puts()
-      end)
-    end)
-
-    :ok
+    |> Output.print_candidates()
   end
 
   @doc """

@@ -5,38 +5,31 @@ defmodule TypoKiller.Typos do
   @minimum_jaro_distance 0.95
   @default_max_demand 100
 
+  alias TypoKiller.Candidate
+
   @doc """
   Based on a list of words, search for possible typos by comparing them with an auxiliar dictionary
   """
   @spec find(
-          {words :: MapSet.t(), dictionary :: MapSet.t(), word_map :: Map.t()},
+          {candidates :: [Candidate.t()], dictionary :: MapSet.t()},
           options :: Keyword.t()
         ) :: Map.t()
-  def find({words, dictionary, word_map}, options \\ []) do
+  def find({candidates, dictionary}, options \\ []) do
     max_demand = options[:max_demand] || @default_max_demand
 
-    words
+    candidates
     |> Flow.from_enumerable(max_demand: max_demand)
-    |> Flow.map(fn word -> calculate_distance(word, dictionary) end)
-    |> Flow.reduce(fn -> MapSet.new() end, &merge_partial_result/2)
-    |> Flow.map(fn candidate -> build_result_map(candidate, word_map) end)
-    |> MapSet.new()
-    |> MapSet.delete(nil)
-    |> MapSet.to_list()
-    |> Map.new()
+    |> Flow.map(fn candidate -> calculate_distance(candidate, dictionary) end)
+    |> Flow.reduce(fn -> [] end, &Kernel.++/2)
+    |> Enum.filter(fn candidate -> candidate != nil end)
   end
 
-  defp merge_partial_result(partial_result, acc) do
-    partial_result_mapset = MapSet.new(partial_result)
-    MapSet.union(partial_result_mapset, acc)
-  end
-
-  defp calculate_distance(word, dict) do
+  defp calculate_distance(%Candidate{word: word} = candidate, dict) do
     dict
     |> Enum.map(fn word_from_dict ->
       with jaro_distance <- String.jaro_distance(word, word_from_dict),
            true <- jaro_distance >= @minimum_jaro_distance and jaro_distance < 1.0 do
-        {word, word_from_dict, jaro_distance}
+        %Candidate{candidate | similar_word: word_from_dict, score: jaro_distance}
       else
         _any -> nil
       end
