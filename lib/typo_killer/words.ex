@@ -9,6 +9,8 @@ defmodule TypoKiller.Words do
 
   @ignored_words_mapset MapSet.new(@ignored_words_list)
 
+  alias TypoKiller.Candidate
+
   @doc """
   Parses a list of files to extract words and their occurrences (file and line)
   """
@@ -23,7 +25,7 @@ defmodule TypoKiller.Words do
     |> Flow.map(&parse_file/1)
     |> Enum.to_list()
     |> Enum.reduce({MapSet.new(), %{}}, &merge_file_list_results/2)
-    |> build_dict()
+    |> build_result()
   end
 
   defp parse_file(file) do
@@ -78,9 +80,17 @@ defmodule TypoKiller.Words do
     end)
   end
 
-  defp build_dict({words, word_map}) do
+  defp build_result({words, word_map}) do
     dictionary = MapSet.union(words, @ignored_words_mapset)
 
-    {words, dictionary, word_map}
+    candidates =
+      Enum.map(words, fn word ->
+        %Candidate{
+          word: word,
+          occurrences: Map.get(word_map, word)
+        }
+      end)
+
+    {candidates, dictionary}
   end
 end
