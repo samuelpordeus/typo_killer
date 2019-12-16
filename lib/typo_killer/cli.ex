@@ -1,4 +1,8 @@
 defmodule TypoKiller.CLI do
+  @moduledoc """
+  Command line interface for our beloved Typo Killer
+  """
+
   @cli_options [
     allow_nonexistent_atoms: false,
     strict: [
@@ -20,12 +24,10 @@ defmodule TypoKiller.CLI do
   end
 
   defp launch({options, command, []}) do
-    cond do
-      options[:help] ->
-        print_help()
-
-      true ->
-        do_launch(command, options)
+    if options[:help] do
+      print_help()
+    else
+      do_launch(command, options)
     end
   end
 

@@ -1,4 +1,7 @@
 defmodule Mix.Tasks.TypoKiller do
+  @moduledoc """
+  Task that runs Typo Killer
+  """
   use Mix.Task
 
   @shortdoc "Runs TypoKiller in the given directories"

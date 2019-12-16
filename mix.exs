@@ -42,6 +42,7 @@ defmodule TypoKiller.MixProject do
   defp deps do
     [
       {:benchee, "~> 1.0", only: :dev},
+      {:credo, "~> 1.1.0", only: [:dev, :test], runtime: false},
       {:dialyxir, "~> 0.5.1", only: :dev, runtime: false},
       {:ex_doc, "~> 0.21", only: :dev, runtime: false},
       {:flow, "~> 0.15.0"}
