@@ -1,5 +1,6 @@
 defmodule TypoKiller.Candidate do
   @moduledoc """
+  Struct for a typo candidate
   """
   defstruct [:word, :similar_word, :score, :occurrences]
 
