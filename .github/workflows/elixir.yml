@@ -19,7 +19,7 @@ jobs:
         mix deps.get
     - name: Run code analysis tools
       run: |
-        mix format --check-formatter
+        mix format --check-formatted
         mix credo --strict
     - name: Run Tests
       run: mix test
