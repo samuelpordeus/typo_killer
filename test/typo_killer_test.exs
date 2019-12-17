@@ -7,7 +7,7 @@ defmodule TypoKillerTest do
   @file_with_typo_output File.read!("./test/fixtures/file_with_typo_output.txt")
 
   describe "find_typos/2" do
-    test "loads path correctly" do
+    test "find typos and print them" do
       find_typos = fn ->
         TypoKiller.find_typos(@file_with_typo)
       end
