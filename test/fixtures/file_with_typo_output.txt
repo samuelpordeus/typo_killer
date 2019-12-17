@@ -1,0 +1,10 @@
+Path: "./test/fixtures/file_with_typo.txt"
+---
+Running...
+┌ mmigrations
+├──┬─ Similar to: migrations
+│  └─ Score: 0.9696969696969697
+│
+└──┬─ File: ./test/fixtures/file_with_typo.txt
+   └─ Lines: 1
+
