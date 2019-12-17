@@ -1,8 +1,8 @@
 defmodule TypoKiller.TyposTest do
   use ExUnit.Case, async: true
 
-  alias TypoKiller.Typos
   alias TypoKiller.Candidate
+  alias TypoKiller.Typos
 
   describe "find/2" do
     test "find a typo successfully" do
