@@ -1,5 +1,6 @@
 # Typo Killer
 ### _qu'est que ce_
+![CI badge](https://github.com/samuelpordeus/typo_killer/workflows/Elixir%20CI/badge.svg)
 
 #### Building
 
