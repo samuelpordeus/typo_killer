@@ -37,7 +37,7 @@ defmodule TypoKiller.FilesTest do
 
       files = Files.find_files_on_folder(@base_path <> "/potato")
 
-      assert files == expected
+      Enum.each(files, &assert(&1 in expected))
     end
 
     test "find all files inside a folder recursively including dot files", %{files: files} do
@@ -54,7 +54,7 @@ defmodule TypoKiller.FilesTest do
 
       files = Files.find_files_on_folder(@base_path <> "/potato", ignore_dot_files: false)
 
-      assert files == expected
+      Enum.each(files, &assert(&1 in expected))
     end
 
     test "find all .txt files inside a folder recursively with allowed_extensions, ignoring dot files",
@@ -69,7 +69,8 @@ defmodule TypoKiller.FilesTest do
 
       files = Files.find_files_on_folder(@base_path <> "/potato", allowed_extensions: ["txt"])
 
-      assert files == expected
+      assert length(files) == length(expected)
+      Enum.each(files, &assert(&1 in expected))
     end
 
     test "find all files,except .txt, inside a folder recursively with blocked_extensions , ignoring dot files",
@@ -85,7 +86,8 @@ defmodule TypoKiller.FilesTest do
 
       files = Files.find_files_on_folder(@base_path <> "/potato", blocked_extensions: ["txt"])
 
-      assert files == expected
+      assert length(files) == length(expected)
+      Enum.each(files, &assert(&1 in expected))
     end
 
     test "find all files inside allowed paths, ignoring dot files", %{files: files} do
@@ -99,7 +101,8 @@ defmodule TypoKiller.FilesTest do
 
       files = Files.find_files_on_folder(@base_path <> "/potato", allowed_paths: ["potato/is"])
 
-      assert files == expected
+      assert length(files) == length(expected)
+      Enum.each(files, &assert(&1 in expected))
     end
 
     test "find all files outside blocked paths, ignoring dot files", %{files: files} do
@@ -114,7 +117,8 @@ defmodule TypoKiller.FilesTest do
 
       files = Files.find_files_on_folder(@base_path <> "/potato", blocked_paths: ["potato/is"])
 
-      assert files == expected
+      assert length(files) == length(expected)
+      Enum.each(files, &assert(&1 in expected))
     end
 
     test "find all files under 2kb, ignoring dot files" do
