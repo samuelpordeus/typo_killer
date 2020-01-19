@@ -52,6 +52,8 @@ Are you using Typo Killer on big repos? Send a PR adding it here! :slightly_smil
 - [Ecto](https://github.com/elixir-ecto/ecto/pull/3174)
 - [Phoenix](https://github.com/phoenixframework/phoenix/pull/3623)
 - [Devise](https://github.com/plataformatec/devise/pull/5167)
+- [Simple Form](https://github.com/heartcombo/simple_form/pull/1681)
+- [Rails](https://github.com/rails/rails/pull/38238)
 
 ### Documentation
 
