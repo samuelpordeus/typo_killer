@@ -48,7 +48,7 @@ This will generate an executable file `bin/typokiller`. Now run
 
 ```Bash
 $ make
-$ sudo make install PREFIX=/usr
+$ sudo make install
 ```
 
 Then you can use it like:

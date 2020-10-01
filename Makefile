@@ -1,5 +1,7 @@
 .PHONY: all install uninstall
 
+PREFIX ?= /usr
+
 all:
 	mix deps.get
 	mix escript.build
