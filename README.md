@@ -44,6 +44,18 @@ mix escript.build
 This will generate an executable file `bin/typokiller`. Now run
 `./bin/typokiller --help` for more information.
 
+#### Installing on a POSIX system
+
+```Bash
+$ make
+$ sudo make install PREFIX=/usr
+```
+
+Then you can use it like:
+
+```
+$ typokiller --help
+```
 
 #### Typo Killer on the wild
 
