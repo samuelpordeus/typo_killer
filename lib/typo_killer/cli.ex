@@ -83,7 +83,7 @@ defmodule TypoKiller.CLI do
 
     Example:
 
-      detektive run --path ~/my_project
+      typokiller run --path ~/my_project
 
     """
     |> IO.puts()
