@@ -1,6 +1,8 @@
 name: Elixir CI
 
-on: push
+on:
+  - push
+  - pull_request
 
 jobs:
   build:
@@ -23,3 +25,5 @@ jobs:
         mix credo --strict
     - name: Run Tests
       run: mix test
+    - name: Check tests coverage
+      run: mix coveralls
