@@ -35,10 +35,4 @@ defmodule TypoKiller.Typos do
       end
     end)
   end
-
-  defp build_result_map(nil, _), do: nil
-
-  defp build_result_map({word, match, score}, word_map) do
-    {word, {match, score, Map.get(word_map, word)}}
-  end
 end
